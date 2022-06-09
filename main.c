@@ -10,13 +10,18 @@
 int TILE_H = HEIGHT / TILES_COUNT_R;	// each tile Height
 int TILE_W = WIDTH / TILES_COUNT_C;		// each tile Width
 
-// Tilemap
+// Tilemap count=10;
 TILE_T TILEMAP[TILES_COUNT_C][TILES_COUNT_R] = {
-	{0, 0, 0, 0, 0},
-	{0, 1, 2, 1, 0},
-	{0, 3, 0, 1, 0},
-	{0, 2, 2, 1, 0},
-	{0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 2, 0},
+	{0, 3, 0, 1, 0, 0, 0, 0, 2, 0},
+	{0, 2, 2, 1, 0, 0, 0, 0, 2, 0},
+	{0, 1, 0, 0, 0, 0, 0, 0, 2, 0},
+	{0, 1, 0, 0, 0, 0, 0, 0, 2, 0},
+	{0, 1, 0, 0, 0, 0, 0, 0, 2, 0},
+	{0, 1, 0, 0, 0, 0, 0, 0, 2, 0},
+	{0, 1, 1, 1, 1, 1, 1, 1, 2, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
 const Color TILE_COLORS[] = {
@@ -45,8 +50,7 @@ int main()
 
 	int pressCount = 0;
 	char pressCountStr[5] = {0};
-	float zoomLevel = CAMERA_ZOOM;
-	char zoomLevelStr[10] = {0};
+	float scroll;
 	// Main game loop
   while (!WindowShouldClose())    // Detect window close button or ESC key
   {
@@ -90,35 +94,32 @@ int main()
 				sprintf(pressCountStr, "%d", pressCount);
 				DrawText(pressCountStr, 300, 400, 30, (Color){23,23,45, 233});
 
-				zoomLevel = GetMouseWheelMove();
-				sprintf(zoomLevelStr, "%f", zoomLevel);
-
-				if (zoomLevel > 0)
+				// ZOOM WHEN SCROLLING !
+				scroll = GetMouseWheelMove();
+				if (scroll > 0)
 				{
 						// zoom has to be increased
-						if (camera.draw_distance.x != TILES_COUNT_R)
-						{
-							// size is not already the max limit !
-							camera.draw_distance.x += 1;
-							camera.draw_distance.y += 1;
-							reTargetGrid();
-						}
-				}
-				else if (zoomLevel < 0)
-				{
-						// zoom has to be decreased // ideally both x and y should be the same lol, but both are public, we really should have just a single number
 						if (camera.draw_distance.x != 1)
 						{
 							// size is not already the max limit !
-							camera.draw_distance.x += -1;
-							camera.draw_distance.y += -1;
-							reTargetGrid();
+							camera.draw_distance.x -= 1;			// zoom increase
+							camera.draw_distance.y -= 1;
+							reTargetGrid();										// change the tileWidth and tileHeight
 						}
 				}
-
-				DrawText(zoomLevelStr, 300, 500, 30, (Color){23,23,45, 233});
+				else if (scroll < 0)
+				{
+						// zoom has to be decreased // ideally both x and y should be the same lol, but both are public, we really should have just a single number
+						if (camera.draw_distance.x != TILES_COUNT_R)
+						{
+							// size is not already the max limit !
+							camera.draw_distance.x += 1;			// zoom decrease
+							camera.draw_distance.y += 1;
+							reTargetGrid();										// change the tileWidth and tileHeight
+						}
+				}
+				// ZOOM CODE ENDS
 		
-
 		EndDrawing();
 	}
 
