@@ -8,7 +8,7 @@ make.exe: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 01 18:04:25 2022
+# Make data base, printed on Thu Jun 09 15:43:40 2022
 
 # Variables
 
@@ -18,6 +18,8 @@ GNUMAKEFLAGS :=
 <D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
 # automatic
 ?F = $(notdir $?)
+# environment
+WSLENV = WT_SESSION::WT_PROFILE_ID
 # default
 .SHELLFLAGS := -c
 # makefile
@@ -47,7 +49,7 @@ OUTPUT_FILE = "game.exe"
 # environment
 ONEDRIVE = C:\Users\harsj\OneDrive
 # environment
-PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.CPL
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST :=  makefile
 # environment
@@ -61,15 +63,17 @@ PROGRAMW6432 = C:\Program Files
 # environment
 PROGRAMDATA = C:\ProgramData
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d5eb7902-d8d0-49af-bccf-4f6e632ff83a-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-92c3f327-491c-4a51-9b02-f11a39cb5419-sock
 # environment
-VSCODE_CWD = C:\Users\harsj\AppData\Local\Programs\Microsoft VS Code
+VSCODE_CWD = C:\Users\harsj\code\c\hello_raylib
 # default
 MAKE_HOST := i686-w64-mingw32
 # environment
-PATH = C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\harsj\.cargo\bin;C:\Users\harsj\AppData\Local\Microsoft\WindowsApps;C:\Users\harsj\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\harsj\AppData\Roaming\npm;C:\raylib\w64devkit\bin;
+PATH = C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\harsj\.cargo\bin;C:\Users\harsj\AppData\Local\Microsoft\WindowsApps;C:\Users\harsj\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\harsj\AppData\Roaming\npm;C:\raylib\w64devkit\bin
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+LC_ALL = C
 # environment
 CHOCOLATEYLASTPATHUPDATE = 132983285529565720
 # environment
@@ -91,7 +95,7 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_12156_XATHURKUNTRHPVIX
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_19352_FACZPUIEDJXIMFCI
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -105,15 +109,19 @@ DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
+WT_SESSION = 84e93477-a3b9-4bc3-a345-9b61487bec85
+# environment
 USERNAME = harsj
 # environment
 PUBLIC = C:\Users\Public
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
+VSCODE_CLI = 1
+# environment
 VSCODE_CODE_CACHE_PATH = C:\Users\harsj\AppData\Roaming\Code\CachedData\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # environment
@@ -141,7 +149,7 @@ PROGRAMFILES(X86) = C:\Program Files (x86)
 # environment
 LOCALAPPDATA = C:\Users\harsj\AppData\Local
 # environment
-PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PSMODULEPATH = C:\Users\harsj\OneDrive\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 # default
 MAKE_COMMAND := make.exe
 # environment
@@ -177,13 +185,15 @@ APPDATA = C:\Users\harsj\AppData\Roaming
 # environment
 TEMP = C:\Users\harsj\AppData\Local\Temp
 # environment
+WT_PROFILE_ID = {61c54bbd-c2c6-5271-96e7-009a87ff44bf}
+# environment
 COMSPEC = C:\WINDOWS\system32\cmd.exe
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
 # environment
-LC_ALL = C
+ELECTRON_NO_ATTACH_CONSOLE = 1
 # automatic
 ^F = $(notdir $^)
 # default
@@ -203,11 +213,11 @@ PROCESSOR_LEVEL = 25
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 12156
+VSCODE_PID = 19352
 # environment
 USERDOMAIN_ROAMINGPROFILE = DESKTOP-7U8PJPJ
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=15/117=13%
+# Load=102/1024=10%, Rehash=0, Collisions=17/122=14%
 
 # Pattern-specific Variable Values
 
@@ -215,9 +225,9 @@ USERDOMAIN_ROAMINGPROFILE = DESKTOP-7U8PJPJ
 
 # Directories
 
-# . (key c:/Users/harsj/code/c/hello_raylib, mtime 1654006653ll): 9 files, no impossibilities.
+# . (key c:/Users/harsj/code/c/hello_raylib, mtime 1654118233ll): 18 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -245,7 +255,19 @@ main.c:
 #  File has not been updated.
 
 # Not a target:
+player.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 utils.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+main.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -258,32 +280,62 @@ makefile:
 #  Successfully updated.
 
 # Not a target:
+player.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-run: utils.c main.c utils.h
+# Not a target:
+tiles.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run: player.c utils.c main.c camera.c tiles.c tiles.h utils.h main.h camera.h player.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 6):
 	gcc -o $(OUTPUT_FILE) *.c "C:\raylib\raylib\src\raylib.rc.data" -s -static -Os -std=c99 -Wall -IC:\raylib\raylib\src -Iexternal -DPLATFORM_DESKTOP -lraylib -lopengl32 -lgdi32 -lwinmm
 
+# Not a target:
+camera.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+tiles.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+camera.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, Collisions=0/21=0%
+# Load=15/1024=1%, Rehash=0, Collisions=2/35=6%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 13 / storage = 90 B / avg = 6 B
-# current buf: size = 8174 B / used = 90 B / count = 13 / avg = 6 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 165 B / avg = 7 B
+# current buf: size = 8174 B / used = 165 B / count = 22 / avg = 7 B
 
-# strcache performance: lookups = 20 / hit rate = 35%
+# strcache performance: lookups = 36 / hit rate = 38%
 # hash-table stats:
-# Load=13/8192=0%, Rehash=0, Collisions=1/20=5%
-# Finished Make data base on Wed Jun 01 18:04:25 2022
+# Load=22/8192=0%, Rehash=0, Collisions=1/36=3%
+# Finished Make data base on Thu Jun 09 15:43:40 2022
 
  

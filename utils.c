@@ -1,12 +1,16 @@
 #include <raylib.h>
+#include <stdbool.h>
+
 #include "main.h"
 #include "utils.h"
+#include "camera.h"
 
 int UTIL_CACHE_w = 0;
 int UTIL_CACHE_h = 0;
 Vector2 UTIL_CACHE_pos = {0,0};
 bool isFullScreen = false;
 
+extern CAMERA_t camera;
 
 void toggleFullscreen() {
     if (isFullScreen) {
@@ -49,6 +53,6 @@ void reTargetGrid() {
 	int w  = GetScreenWidth();
 	int h  = GetScreenHeight();	
 
-	TILE_W = w / TILES_COUNT_C;
-	TILE_H = h / TILES_COUNT_R;
+	TILE_W = w / camera.draw_distance.x;
+	TILE_H = h / camera.draw_distance.y;
 }
