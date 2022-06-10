@@ -6,6 +6,9 @@
 #include "utils.h"
 #include "tiles.h"
 #include "camera.h"
+#include "input.h"
+
+#include "player.h"
 
 int TILE_H = HEIGHT / TILES_COUNT_R;	// each tile Height
 int TILE_W = WIDTH / TILES_COUNT_C;		// each tile Width
@@ -38,6 +41,9 @@ CAMERA_t camera = {
 };
 
 
+KEYPRESSMAP_t key_press_map = { 0, 0, 0, 0 };
+Player_t main_player = { .pos={2, 3}, .acceleration=10, .velocity={0,0}};
+
 int main()
 {
 	// setting according to camera
@@ -57,34 +63,43 @@ int main()
 		BeginDrawing();
 
 				DrawFPS(0,0);
+
+				// update input map
+				// key_press_map = (KEYPRESSMAP_t){
+				// 	IsKeyPressed(KEY_LEFT),
+				// 	IsKeyPressed(KEY_DOWN),
+				// 	IsKeyPressed(KEY_UP),
+				// 	IsKeyPressed(KEY_RIGHT),
+				// };
+
 				// update segment
-				if (IsKeyPressed(KEY_LEFT))
-				{
-					printf("LOGGING::: KEYPRESSED\n");
-					printf("%d %d\n", camera.pos.x, camera.pos.y);
-					camera.pos.x = camera.pos.x == 0 ? 0 : camera.pos.x - 1;
-				}
-				if (IsKeyPressed(KEY_DOWN)) {
-					printf("LOGGING::: KEYPRESSED\n");
-					printf("%d %d\n", camera.pos.x, camera.pos.y);
-					// camera.pos.y++; 
-					camera.pos.y = camera.pos.y == TILES_COUNT_R - 1 ? TILES_COUNT_R -1 : camera.pos.y + 1;
-				}
-				if (IsKeyPressed(KEY_UP)) {
-					printf("LOGGING::: KEYPRESSED\n");
-					printf("%d %d\n", camera.pos.x, camera.pos.y);
-					// camera.pos.y--;
-					camera.pos.y = camera.pos.y == 0 ? 0 : camera.pos.y - 1;
-				}
-				if (IsKeyPressed(KEY_RIGHT))
-				{
-					printf("LOGGING::: KEYPRESSED\n");
-					printf("%d %d\n", camera.pos.x, camera.pos.y);
-					// camera.pos.x++;
-					camera.pos.x = camera.pos.x == TILES_COUNT_C - 1 ? TILES_COUNT_C -1 : camera.pos.x + 1;
-				}
-				if (IsKeyPressed(KEY_A))
-					populateTiles();
+				// if (IsKeyPressed(KEY_LEFT))
+				// {
+				// 	// printf("LOGGING::: KEYPRESSED\n");
+				// 	// printf("%d %d\n", camera.pos.x, camera.pos.y);
+				// 	// camera.pos.x = camera.pos.x == 0 ? 0 : camera.pos.x - 1;
+				// }
+				// if (IsKeyPressed(KEY_DOWN)) {
+				// 	// printf("LOGGING::: KEYPRESSED\n");
+				// 	// printf("%d %d\n", camera.pos.x, camera.pos.y);
+				// 	// camera.pos.y++; 
+				// 	// camera.pos.y = camera.pos.y == TILES_COUNT_R - 1 ? TILES_COUNT_R -1 : camera.pos.y + 1;
+				// }
+				// if (IsKeyPressed(KEY_UP)) {
+				// 	// printf("LOGGING::: KEYPRESSED\n");
+				// 	// printf("%d %d\n", camera.pos.x, camera.pos.y);
+				// 	// camera.pos.y--;
+				// 	// camera.pos.y = camera.pos.y == 0 ? 0 : camera.pos.y - 1;
+				// }
+				// if (IsKeyPressed(KEY_RIGHT))
+				// {
+				// 	// printf("LOGGING::: KEYPRESSED\n");
+				// 	// printf("%d %d\n", camera.pos.x, camera.pos.y);
+				// 	// camera.pos.x++;
+				// 	// camera.pos.x = camera.pos.x == TILES_COUNT_C - 1 ? TILES_COUNT_C -1 : camera.pos.x + 1;
+				// }
+				// if (IsKeyPressed(KEY_A))
+				// 	populateTiles();
 
 				// draw segment
 				ClearBackground(GRAY);
@@ -94,6 +109,12 @@ int main()
 				sprintf(pressCountStr, "%d", pressCount);
 				DrawText(pressCountStr, 300, 400, 30, (Color){23,23,45, 233});
 
+				p_update();
+				p_render();
+				// DrawRectangle(0, 0, TILE_W, TILE_H, (Color){32,255,343, 214});
+
+
+				// #region
 				// ZOOM WHEN SCROLLING !
 				scroll = GetMouseWheelMove();
 				if (scroll > 0)
@@ -118,7 +139,7 @@ int main()
 							reTargetGrid();										// change the tileWidth and tileHeight
 						}
 				}
-				// ZOOM CODE ENDS
+				// #endregion ZOOM CODE ENDS
 		
 		EndDrawing();
 	}
