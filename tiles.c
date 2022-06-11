@@ -47,6 +47,10 @@ void drawTiles()
 	}
 }
 
+void updateTiles()
+{
+	// for transforming the map !
+}
 
 void saveTiles()
 {

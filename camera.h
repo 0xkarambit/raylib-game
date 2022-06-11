@@ -2,6 +2,7 @@
 #include <raylib.h>
 
 #define CAMERA_ZOOM 10
+#define MAX_WORLD_VIEW 200
 
 struct int_vec2
 {
