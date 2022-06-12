@@ -1,36 +1,47 @@
 #include <raylib.h>
 
 #include "player.h"
-#include "input.h"
+#include "camera.h"
 #include "main.h"
 
 extern Player_t main_player;
 extern int TILE_H;
 extern int TILE_W;
+extern CAMERA_t camera;
 // extern KEYPRESSMAP_t key_press_map;
 
 void p_render()
 {
 	// printf("called !\n");
-	int x = main_player.pos.x;
-	int y = main_player.pos.y;
+	int_vec2 coors = Camera_get_relative_coors(main_player.pos);
+	int x = coors.x;
+	int y = coors.y;
+
 	int width = main_player.width;
 	int height = main_player.height;
-	// DrawRectangle(100, 100, 30, 50, (Color){0,255,0});
+	
 	DrawRectangle(x*TILE_W, y*TILE_H, TILE_W*width, TILE_H*height, (Color){0,0,0, 255});
 	
+	// printing coorinates debug stuff !
+	char coor[10] = {0};
+	sprintf(coor, "%d, %d", x, y);{
+	DrawText(coor, x*TILE_W, y*TILE_H, 12, (Color){255, 255, 255, 255});}
+	// DrawText(coor, x*TILE_W, y*TILE_H, 12, (Color){255, 255, 255, 255});}
 	// DrawRectangle(x, y, TILE_W * width ? , TILE_W * height ?, (Color){0,0,0, 255});
 }
 
 
 static const int DRAG = 1;
-static const int MAX_VEL = 20;
-static const int MIN_VEL = -20;
+static const int MAX_VEL = 2;
+static const int MIN_VEL = -2;
 
 void p_update()
 {
 
 	// todo
+	// make the C include errors detector / graph visualiser tool !
+	// make a cli logging thing to update the values in place in output
+	// we need an entity OOP based system !
 	// make the camera follow the player and add a scenes system ??
 
 	// applying drag in the opposite direction !!
@@ -55,7 +66,7 @@ void p_update()
 
 	// check keypresses
 	int acceleration = main_player.acceleration;
-	struct int_vec2 *velocity = &main_player.velocity;
+	int_vec2 *velocity = &main_player.velocity;
 
 	if (IsKeyDown(KEY_LEFT))
 	{
@@ -100,6 +111,31 @@ void p_update()
 		main_player.pos.x =  TILES_COUNT_R;
 	}
 
+}
+
+void simple_move()
+{
+	if (IsKeyPressed(KEY_LEFT))
+	{
+		//
+		main_player.pos.x -= main_player.acceleration;
+
+	}
+	if (IsKeyPressed(KEY_DOWN)) {
+		// main_player.pos.pos.y++; 
+		main_player.pos.y += main_player.acceleration;
+		
+	}
+	if (IsKeyPressed(KEY_UP)) {
+		// main_player.pos.pos.y--;
+		main_player.pos.y -= main_player.acceleration;
+		
+	}
+	if (IsKeyPressed(KEY_RIGHT))
+	{
+		// main_player.pos.pos.x++;
+		main_player.pos.x += main_player.acceleration;
+	}
 }
 
 // void P_render()

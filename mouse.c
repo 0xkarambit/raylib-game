@@ -32,11 +32,11 @@ void mouse_update()
 	{
 		if (cameraFullView) {
 			cameraFullView = 0;
-			camera.draw_distance = (struct int_vec2){CAMERA_ZOOM, CAMERA_ZOOM};
+			camera.draw_distance = (int_vec2){CAMERA_ZOOM, CAMERA_ZOOM};
 		}
 		else {
 			cameraFullView = 1;
-			camera.draw_distance = (struct int_vec2){MAX_WORLD_VIEW, MAX_WORLD_VIEW};
+			camera.draw_distance = (int_vec2){MAX_WORLD_VIEW, MAX_WORLD_VIEW};
 		}
 		reTargetGrid();
 		// main_player.height = TILE_H;

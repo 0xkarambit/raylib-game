@@ -6,7 +6,7 @@
 #include "utils.h"
 #include "tiles.h"
 #include "camera.h"
-#include "input.h"
+// #include "input.h"
 #include "mouse.h"
 
 #include "player.h"
@@ -43,8 +43,17 @@ CAMERA_t camera = {
 int cameraFullView = 0;
 
 
-KEYPRESSMAP_t key_press_map = { 0, 0, 0, 0 };
-Player_t main_player = { .pos={2, 3}, .acceleration=2, .velocity={0,0}, .width=2, .height=2};
+// KEYPRESSMAP_t key_press_map = { 0, 0, 0, 0 };
+Player_t main_player = {
+	.pos={2, 3},	// x is the colNO and y is the rowNO, they start from 0
+	.acceleration=2,
+	.velocity={0,0},
+	.width=1,
+	.height=1
+};
+
+// make an array of entities ?
+
 
 int main()
 {
@@ -62,14 +71,16 @@ int main()
 		BeginDrawing();
 				// draw segment
 				ClearBackground(GRAY);
-				drawTiles();
 
 				p_update();
-				p_render();
+				// simple_move();
 				// DrawRectangle(0, 0, TILE_W, TILE_H, (Color){32,255,343, 214});
 				mouse_update();
-
+				Camera_follow_entity(main_player);
 				
+				drawTiles();
+				p_render();
+
 				DrawFPS(0,0);
 
 		EndDrawing();
