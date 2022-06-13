@@ -97,18 +97,18 @@ void p_update()
 		main_player.pos.x =  0;
 	}
 
-	if (main_player.pos.y*TILE_H + main_player.height >= TILES_COUNT_C*TILE_H - 1)	 {
+	if (main_player.pos.y*TILE_H + main_player.height >= (TILES_COUNT_C- 1)*TILE_H)	 {
 		// main_player.pos.y =  TILES_COUNT_C*TILE_H -1;
-		main_player.pos.y =  TILES_COUNT_C;
+		main_player.pos.y =  TILES_COUNT_C - 1;
 	}
 
 	if (main_player.pos.y <= 0)	 {
 		main_player.pos.y =  0;
 	}
 
-	if (main_player.pos.x*TILE_W + main_player.width >= TILES_COUNT_R*TILE_W - 1)	 {
+	if (main_player.pos.x*TILE_W + main_player.width >= (TILES_COUNT_R- 1)*TILE_W)	 {
 		// main_player.pos.x =  TILES_COUNT_R*TILE_W -1;
-		main_player.pos.x =  TILES_COUNT_R;
+		main_player.pos.x =  TILES_COUNT_R - 1;
 	}
 
 }

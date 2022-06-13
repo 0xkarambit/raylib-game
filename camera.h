@@ -4,7 +4,6 @@
 #include "types.h"
 #include "player.h"
 
-
 #define CAMERA_ZOOM 10
 #define MAX_WORLD_VIEW 200
 
@@ -12,17 +11,18 @@
 // but how can we move camera smoothly then
 typedef struct CAMERA_s
 {
-	int_vec2 pos;					 // x = row , y = col | so | TILES[y][x] will be used to access a tile
-																 // y points to the rowIndex and x points to the columnIndex in that row
+	int_vec2 pos;						// x = row , y = col | so | TILES[y][x] will be used to access a tile
+													// y points to the rowIndex and x points to the columnIndex in that row
 	int_vec2 draw_distance; // can also be called the zoom level
 } CAMERA_t;
 
-enum DIRECTION {
+enum DIRECTION
+{
 	NONE,
 	LEFT,
 	RIGHT,
 	TOP,
-	BOTTOM
+	DOWN
 };
 
 void Camera_set_pos(int x, int y);

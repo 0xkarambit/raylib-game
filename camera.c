@@ -37,7 +37,7 @@ bool Camera_move(enum DIRECTION dir)
 			moved = true;
 			break;
 
-		case BOTTOM:
+		case DOWN:
 			camera.pos.y += (camera.pos.y >= TILES_COUNT_C) ? 0 : 1;
 			moved = true;
 			break;
@@ -52,33 +52,41 @@ bool Camera_move(enum DIRECTION dir)
 void Camera_follow_entity(Player_t entity)
 {
 	const int CAMERAMOVEDISTANCE = 2; // if the player is at least at this must distance from the camera frame borders the frame should move in the required direction
-	
 
 	// min 0, 0
 	// max TILE_COUNT_R, TILE_COUNT_C
 	// i guess move would only be in 2 directions at the same time ???
 	// enum DIRECTION directions[2] = {0}; // would have to make a counter too .... too much code
-	while (entity.pos.y > (camera.pos.y + camera.draw_distance.y - 1 - CAMERAMOVEDISTANCE))
-	{
-		// printf("moved %d\n", Camera_move(BOTTOM));
-		if (!Camera_move(BOTTOM)) break;
+	while (
+		// 200, 0 - 199, 10
+		// 0 - 9 first ten
+		// 190 - 199 last ten
+
+		camera.pos.y < (TILES_COUNT_C - camera.draw_distance.y) 
+		&& entity.pos.y > (camera.pos.y + camera.draw_distance.y - 1 - CAMERAMOVEDISTANCE)
+	) {
+		// down wala kharab he
+		if (!Camera_move(DOWN)) break;
 		// camera.pos.y++;
 	}
-	while (entity.pos.x > (camera.pos.x + camera.draw_distance.x - 1 - CAMERAMOVEDISTANCE))
-	{
-		// printf("moved %d\n", Camera_move(RIGHT));
+	while (
+		camera.pos.x < (TILES_COUNT_R - camera.draw_distance.x) 
+		&& entity.pos.x > (camera.pos.x + camera.draw_distance.x - 1 - CAMERAMOVEDISTANCE)
+	) {
 		if (!Camera_move(RIGHT)) break;
 		// camera.pos.x++;
 	}
-	while (entity.pos.y < (camera.pos.y + camera.draw_distance.y + CAMERAMOVEDISTANCE))
-	{
-		// printf("moved %d\n", Camera_move(TOP));
+	while (
+		camera.pos.y > 0 && entity.pos.y 
+		< (camera.pos.y + CAMERAMOVEDISTANCE)
+	) {
 		if (!Camera_move(TOP)) break;
 		// camera.pos.y--;
 	}
-	while (entity.pos.x < (camera.pos.x + camera.draw_distance.x + CAMERAMOVEDISTANCE))
-	{
-		// printf("moved %d\n", Camera_move(LEFT));
+	while (
+		camera.pos.x > 0 && entity.pos.x 
+		< (camera.pos.x + CAMERAMOVEDISTANCE)
+	) {
 		if (!Camera_move(LEFT)) break;
 		// camera.pos.x--;
 	}
