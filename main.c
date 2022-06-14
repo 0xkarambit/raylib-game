@@ -10,6 +10,8 @@
 #include "mouse.h"
 
 #include "player.h"
+#include "./MainMenu/main_menu.h"
+
 
 int TILE_H = 0; // HEIGHT / TILES_COUNT_R;	// each tile Height
 int TILE_W = 0; // WIDTH / TILES_COUNT_C;		// each tile Width
@@ -55,37 +57,30 @@ Player_t main_player = {
 // make an array of entities ?
 
 
+extern SCENE MAIN_MENU_SCENE;
+
+SCENE *current_scene = &MAIN_MENU_SCENE;
+
 int main()
-{
-	// setting according to camera
+{	
 	TILE_H = HEIGHT / camera.draw_distance.y;	// each tile Height
 	TILE_W = WIDTH / camera.draw_distance.x;		// each tile Width
-	
 	InitWindow(WIDTH, HEIGHT, TITLE);
-	// ToggleFullscreen();
 	SetTargetFPS(TARGET_FPS);
-
+	current_scene->setup();
 	// Main game loop
   while (!WindowShouldClose())    // Detect window close button or ESC key
   {
 		BeginDrawing();
-				// draw segment
-				ClearBackground(GRAY);
 
-				p_update();
-				// simple_move();
-				// DrawRectangle(0, 0, TILE_W, TILE_H, (Color){32,255,343, 214});
-				mouse_update();
-				Camera_follow_entity(main_player);
-				
-				drawTiles();
-				p_render();
-
+				current_scene->render();
+				current_scene->update();
 				DrawFPS(0,0);
 
 		EndDrawing();
 	}
 
+	current_scene->exit();
 	CloseWindow();        // Close window and OpenGL context
 
 	return 0;

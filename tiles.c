@@ -31,6 +31,8 @@ void drawTiles()
 {
 	int pos_x = 0;
 	int pos_y = 0;
+
+	// debugging stuff
 	char coor[10] = {0};
 
 	for (int i = camera.pos.y; i < camera.draw_distance.y + camera.pos.y; i++) {
@@ -41,6 +43,8 @@ void drawTiles()
 			Color color = TILE_COLORS[tile];
 
 			DrawRectangle(pos_x, pos_y, TILE_W, TILE_H, color);
+
+			// debugging stuff
 			sprintf(coor, "%d, %d", ii, i);
 			DrawText(coor, pos_x, pos_y, 12, (Color){0, 0, 0, 255});
 			pos_x += TILE_W;
