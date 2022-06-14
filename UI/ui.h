@@ -2,6 +2,7 @@
 
 #include <raylib.h>
 
+// Remain Vigilant during Raw use as there is no way to know if the functions have been initialised :skull
 typedef struct element_s Element_t;
 
 struct element_s
@@ -23,7 +24,7 @@ struct element_s
 	void (*onAlloc)(Element_t *self);				// do we even need this tbh
 
 	// destructor
-	void (*onFree)(Element_t *self);
+	void (*onFree)(Element_t *self);				// SERIOUSLY I SHOULD RENAME THIS  | YES all *onSomething* should be unique to the element object
 
 	// core functions ??
 	void (*pollClick)(Element_t *self); 			// calls the onClick function if click is inside the element

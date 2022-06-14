@@ -4,6 +4,7 @@
 
 #include "main.h"
 #include "utils.h"
+#include "scenes.h"
 #include "tiles.h"
 #include "camera.h"
 // #include "input.h"

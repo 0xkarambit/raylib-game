@@ -42,7 +42,15 @@ void ui_render(Element_t *self)
 {
 	// not checking if the function 
 	DrawRectangle(self->x, self->y, self->w, self->h, self->bg_color);
-	DrawText(self->text, self->x, self->y, self->fs, self->color);
+
+	// center text
+	int textlen = strlen(self->text);
+	int text_width = (textlen * self->fs/2);
+	int text_x = (self->x + (self->w / 2))  - (text_width/2);
+	int text_y = self->y + (self->h/2) - (self->fs/2);
+	
+	// todo remove the 30
+	DrawText(self->text, text_x, text_y, self->fs, self->color);
 }
 
 
