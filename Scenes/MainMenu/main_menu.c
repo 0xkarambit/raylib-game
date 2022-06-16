@@ -3,8 +3,8 @@
 
 #include <raylib.h>
 
-#include "../types.h"
-#include "../UI/ui.h"
+#include "../../scenes.h"
+#include "../../UI/ui.h"
 
 #include "main_menu.h"
 #include "buttons.h"
@@ -23,6 +23,26 @@ char* strings[ELEMENTS_COUNT] = {
 	"Settings",
 	"Design a Level",
 	"Credits"
+};
+
+extern SCENE WIP_SCENE;
+extern SCENE MAP_MAKER_SCENE;
+
+void change_to_wip()
+{
+	switch_scene(&WIP_SCENE);
+}
+
+void change_to_game()
+{
+	switch_scene(&MAP_MAKER_SCENE);
+}
+
+void (*onclick_functions[])() = {
+	&change_to_game,
+	&btn_clicked,
+	&change_to_wip,
+	&btn_clicked,
 };
 
 Element_t* elements = (Element_t*)0;
@@ -49,14 +69,12 @@ void mm_setup()
 		thisElm->x = x_coor;
 		thisElm->y = y_coor;
 		y_coor += (ELEMENTS_HEIGHT + offset);
-		
-		printf("index %d y-coor : %d\n", i, thisElm->y);
 
 		thisElm->w = ELEMENTS_WIDTH;
 		thisElm->h = ELEMENTS_HEIGHT;
 
 		// todo: add custom click logic to swap scene
-		thisElm->onClick = &btn_clicked;
+		thisElm->onClick = onclick_functions[i];
 	}
 };
 
@@ -80,7 +98,7 @@ void mm_render()
 	}
 };
 
-void mm_exit()
+bool mm_exit()
 {
 
 	for (int i = 0; i < ELEMENTS_COUNT; ++i)
@@ -90,7 +108,8 @@ void mm_exit()
 	}																				// like with onclick
 
 	free(elements);
-	printf("Scene Over !");
+	printf("MAIN_MENU_SCENE Scene Over !\n");
+	return true;
 };
 
 

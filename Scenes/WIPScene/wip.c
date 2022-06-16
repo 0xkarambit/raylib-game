@@ -4,8 +4,8 @@
 
 #include <raylib.h>
 
-#include "../scenes.h"
-#include "../UI/ui.h"
+#include "../../scenes.h"
+#include "../../UI/ui.h"
 
 extern SCENE MAIN_MENU_SCENE;
 

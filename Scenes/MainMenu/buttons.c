@@ -1,7 +1,7 @@
 #include <raylib.h>
 #include <stdio.h>
 
-#include "../UI/ui.h"
+#include "../../UI/ui.h"
 
 // to extend/customize the ui.h functionality
 void btn_clicked(Element_t* btn)
