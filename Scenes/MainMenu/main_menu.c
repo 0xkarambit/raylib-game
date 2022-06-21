@@ -20,6 +20,7 @@
 
 // Elements_data
 
+extern bool should_exit;
 extern SCENE WIP_SCENE;
 extern SCENE MAP_MAKER_SCENE;
 
@@ -32,7 +33,11 @@ void change_to_game()
 {
 	switch_scene(&MAP_MAKER_SCENE);
 }
-
+void exit_game()
+{
+	// MAIN_MENU_SCENE.exit();
+	should_exit = true;
+}
 
 Element_data_t mm_elm_data[] = {
 	{
@@ -57,8 +62,8 @@ Element_data_t mm_elm_data[] = {
 		.h=ELEMENTS_HEIGHT 
 	},
 	{
-		.text="Credits",
-		.onClick=&btn_clicked,
+		.text="Exit",
+		.onClick=&exit_game,
 		.fs=24,
 		.w=ELEMENTS_WIDTH,
 		.h=ELEMENTS_HEIGHT 

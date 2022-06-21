@@ -93,7 +93,7 @@ void pause_menu_update()
 
 void pause_menu_render()
 {
-	ClearBackground(WHITE);
+	// ClearBackground(WHITE);
 	UIGroup_render(pm_uigrp);
 };
 
