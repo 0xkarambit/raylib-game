@@ -15,7 +15,6 @@ void UIGroup_setup(UIGROUP_t* grp, int elm_count, Element_data_t* data)
 {
 	grp->elm_count = elm_count;
 	grp->elements = calloc(sizeof(Element_t), elm_count);
-	printf("ye toh theek he \n");
 
 	for (int i = 0; i < elm_count; ++i)
 	{

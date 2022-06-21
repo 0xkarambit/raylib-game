@@ -60,11 +60,25 @@ Player_t main_player = {
 
 extern bool isPaused;
 
+Element_t *pause_btn = 0;
+
 void map_maker_setup()
 {
+	pause_btn = calloc(sizeof(Element_t), 1);
+	*pause_btn = ui_create_button("Pause");
+	pause_btn->onClick = &pause_menu_setup;
+	pause_btn->x = 40;
+	pause_btn->y = 40;
+	pause_btn->w = 300;
+	pause_btn->h = 100;
+	pause_btn->bg_color = BLACK;
+	pause_btn->color = RED;
+	pause_btn->fs = 18;
+
 	// setting according to camera
 	TILE_H = HEIGHT / camera.draw_distance.y;	// each tile Height
 	TILE_W = WIDTH / camera.draw_distance.x;		// each tile Width	
+
 };
 
 void map_maker_update()
@@ -72,6 +86,9 @@ void map_maker_update()
 	// tribber pause menu
 	if (IsKeyPressed(KEY_BACKSPACE)) (isPaused) ? pause_menu_exit() : pause_menu_setup();
 	if (isPaused) { pause_menu_update(); return; };
+
+	// pause btn
+	pause_btn->pollClick(pause_btn);
 
 	p_update();
 	// simple_move();
@@ -90,11 +107,13 @@ void map_maker_render()
 	ClearBackground(GRAY);
 	drawTiles();
 	p_render();
+	pause_btn->render(pause_btn);
 };
 
 bool map_maker_exit()
 {
 	if (isPaused) pause_menu_exit();
+	pause_btn->onFree(pause_btn);
 	printf("leaving the MAP_MAKER scene !\n");
 	return true;
 };

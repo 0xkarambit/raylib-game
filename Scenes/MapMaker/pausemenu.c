@@ -35,7 +35,7 @@ void unpause(Element_t *self) {
 	// pause_menu_exit(); // should i even be calling it here ? wouldnt it be better to keep the resources allocated as long as the parent scene is active and the game can be paused
 };
 
-Element_data_t elm_data[] = {
+Element_data_t pm_elm_data[] = {
 	{
 		.text="Continue",
 		.onClick=&unpause,
@@ -59,12 +59,12 @@ Element_data_t elm_data[] = {
 	},
 };
 
-UIGROUP_t *uigrp = 0;
+UIGROUP_t *pm_uigrp = 0;
 
 void pause_menu_setup()
 {
 
-	uigrp = calloc(sizeof(UIGROUP_t), 1);
+	pm_uigrp = calloc(sizeof(UIGROUP_t), 1);
 
 	isPaused = true;
 
@@ -76,31 +76,32 @@ void pause_menu_setup()
 	// initialising all the menu buttons
 	for (int i = 0; i < ELEMENTS_COUNT; ++i)
 	{
-		elm_data[i].bg_color = (Color){200, 23, 23, 255};
-		elm_data[i].color = (Color){255, 255, 255, 255};
-		elm_data[i].x = x_coor;
-		elm_data[i].y = y_coor;
+		pm_elm_data[i].bg_color = (Color){200, 23, 23, 255};
+		pm_elm_data[i].color = (Color){255, 255, 255, 255};
+		pm_elm_data[i].x = x_coor;
+		pm_elm_data[i].y = y_coor;
 		y_coor += (ELEMENTS_HEIGHT + offset);
 	}
 
-	UIGroup_setup(uigrp, ELEMENTS_COUNT, &elm_data[0]);
+	UIGroup_setup(pm_uigrp, ELEMENTS_COUNT, &pm_elm_data[0]);
 };
 
 void pause_menu_update()
 {
-	UIGroup_update(uigrp);
+	UIGroup_update(pm_uigrp);
 };
 
 void pause_menu_render()
 {
-	UIGroup_render(uigrp);
+	ClearBackground(WHITE);
+	UIGroup_render(pm_uigrp);
 };
 
 bool pause_menu_exit()
 {
 	isPaused = false;
-	UIGroup_exit(uigrp);
-	free(uigrp);
+	UIGroup_exit(pm_uigrp);
+	free(pm_uigrp);
 
 	printf("Pause menu resources freed ! \n");
 	return true;

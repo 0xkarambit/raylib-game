@@ -5,6 +5,7 @@
 
 #include "../../scenes.h"
 #include "../../UI/ui.h"
+#include "../../UI/UIGroup.h"
 
 #include "main_menu.h"
 #include "buttons.h"
@@ -18,12 +19,6 @@
 #define TOP_PADDING 50
 
 // Elements_data
-char* strings[ELEMENTS_COUNT] = {
-	"Play Game",
-	"Settings",
-	"Design a Level",
-	"Credits"
-};
 
 extern SCENE WIP_SCENE;
 extern SCENE MAP_MAKER_SCENE;
@@ -38,19 +33,44 @@ void change_to_game()
 	switch_scene(&MAP_MAKER_SCENE);
 }
 
-void (*onclick_functions[])() = {
-	&change_to_game,
-	&btn_clicked,
-	&change_to_wip,
-	&btn_clicked,
+
+Element_data_t mm_elm_data[] = {
+	{
+		.text="Play Game",
+		.onClick=&change_to_game,
+		.fs=24,
+		.w=ELEMENTS_WIDTH,
+		.h=ELEMENTS_HEIGHT
+	},
+	{
+		.text="Settings",
+		.onClick=&btn_clicked,
+		.fs=24,
+		.w=ELEMENTS_WIDTH,
+		.h=ELEMENTS_HEIGHT 
+	},
+	{
+		.text="Design a Level",
+		.onClick=&change_to_wip,
+		.fs=24,
+		.w=ELEMENTS_WIDTH,
+		.h=ELEMENTS_HEIGHT 
+	},
+	{
+		.text="Credits",
+		.onClick=&btn_clicked,
+		.fs=24,
+		.w=ELEMENTS_WIDTH,
+		.h=ELEMENTS_HEIGHT 
+	},
 };
 
-Element_t* elements = (Element_t*)0;
+UIGROUP_t *mm_uigrp = 0;
 
 void mm_setup()
 {
-	// allocating space for elements !;
-	elements = calloc(sizeof(Element_t), ELEMENTS_COUNT);
+	// allocating space for ui_grp !;
+	mm_uigrp = calloc(sizeof(UIGROUP_t), 1);
 
 	int w  = GetScreenWidth();
 	// int h  = GetScreenHeight();
@@ -61,54 +81,31 @@ void mm_setup()
 	// initialising all the menu buttons
 	for (int i = 0; i < ELEMENTS_COUNT; ++i)
 	{
-		Element_t *thisElm = &elements[i];
-		*thisElm = ui_create_button(strings[i]);
-
-		thisElm->bg_color = (Color){200, 23, 23, 255};
-		thisElm->color = (Color){255, 255, 255, 255};
-		thisElm->x = x_coor;
-		thisElm->y = y_coor;
+		mm_elm_data[i].bg_color = (Color){200, 23, 23, 255};
+		mm_elm_data[i].color = (Color){255, 255, 255, 255};
+		mm_elm_data[i].x = x_coor;
+		mm_elm_data[i].y = y_coor;
 		y_coor += (ELEMENTS_HEIGHT + offset);
-
-		thisElm->w = ELEMENTS_WIDTH;
-		thisElm->h = ELEMENTS_HEIGHT;
-
-		// todo: add custom click logic to swap scene
-		thisElm->onClick = onclick_functions[i];
 	}
+
+	UIGroup_setup(mm_uigrp, ELEMENTS_COUNT, &mm_elm_data[0]);
 };
 
 void mm_update()
 {
-	for (int i = 0; i < ELEMENTS_COUNT; ++i)
-	{
-		Element_t *thisElm = &elements[i];
-		thisElm->pollClick(thisElm);
-		// debug info:
-		// after pollClick calls the onClicked which calls the switch_scene the control flow jumps back here
-		//  and it leads to errors as this scene's exit function has already been called and all the objects have been freed !
-	}
+	UIGroup_update(mm_uigrp);
 };
 
 void mm_render()
 {
-	ClearBackground((Color){255, 255, 255, 255});
-	for (int i = 0; i < ELEMENTS_COUNT; ++i)
-	{
-		Element_t *thisElm = &elements[i];
-		thisElm->render(thisElm);
-	}
+	ClearBackground((Color){255,255,255,255});
+	UIGroup_render(mm_uigrp);
 };
 
 bool mm_exit()
 {
-	for (int i = 0; i < ELEMENTS_COUNT; ++i)
-	{
-		Element_t *thisElm = &elements[i];
-		thisElm->onFree(thisElm);							// having these function pointers in structs might feel useless, but remember they are for custom unique functions
-	}																				// like with onclick
-
-	free(elements);
+	UIGroup_exit(mm_uigrp);
+	free(mm_uigrp);
 	printf("MAIN_MENU_SCENE Scene Over !\n");
 	return true;
 };
