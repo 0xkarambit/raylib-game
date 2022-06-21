@@ -17,6 +17,7 @@
 extern SCENE MAIN_MENU_SCENE;
 
 SCENE *current_scene = &MAIN_MENU_SCENE;
+SCENE *next_scene = NULL;
 
 int main()
 {	
@@ -32,6 +33,7 @@ int main()
 
 				current_scene->render();
 				current_scene->update();
+				swap_scenes();
 				DrawFPS(0,0);
 
 		EndDrawing();

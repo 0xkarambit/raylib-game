@@ -84,13 +84,15 @@ void mm_update()
 	{
 		Element_t *thisElm = &elements[i];
 		thisElm->pollClick(thisElm);
+		// debug info:
+		// after pollClick calls the onClicked which calls the switch_scene the control flow jumps back here
+		//  and it leads to errors as this scene's exit function has already been called and all the objects have been freed !
 	}
 };
 
 void mm_render()
 {
 	ClearBackground((Color){255, 255, 255, 255});
-	// render ui
 	for (int i = 0; i < ELEMENTS_COUNT; ++i)
 	{
 		Element_t *thisElm = &elements[i];
@@ -100,7 +102,6 @@ void mm_render()
 
 bool mm_exit()
 {
-
 	for (int i = 0; i < ELEMENTS_COUNT; ++i)
 	{
 		Element_t *thisElm = &elements[i];

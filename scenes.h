@@ -15,5 +15,6 @@ typedef struct SCENE_s
 } SCENE;
 
 bool switch_scene(SCENE* next_scene);
+bool swap_scenes();
 
 // I remember now not adding a void keyword in args list means any no of args can be passed lmao

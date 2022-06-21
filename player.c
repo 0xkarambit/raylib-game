@@ -14,7 +14,6 @@ extern CAMERA_t camera;
 
 void p_render()
 {
-	// printf("called !\n");
 	int_vec2 coors = Camera_get_relative_coors(main_player.pos);
 	int x = coors.x;
 	int y = coors.y;

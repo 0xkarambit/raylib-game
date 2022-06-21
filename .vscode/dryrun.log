@@ -1,5 +1,0 @@
-make.exe --dry-run --always-make --keep-going --print-directory
-make.exe: Entering directory 'c:/Users/harsj/code/c/hello_raylib'
-gcc -o "game.exe" *.c "C:\raylib\raylib\src\raylib.rc.data" -s -static -Os -std=c99 -Wall -IC:\raylib\raylib\src -Iexternal -DPLATFORM_DESKTOP -lraylib -lopengl32 -lgdi32 -lwinmm
-make.exe: Leaving directory 'c:/Users/harsj/code/c/hello_raylib'
- 

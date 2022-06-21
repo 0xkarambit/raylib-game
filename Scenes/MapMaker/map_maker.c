@@ -71,7 +71,7 @@ void map_maker_update()
 {
 	// tribber pause menu
 	if (IsKeyPressed(KEY_BACKSPACE)) (isPaused) ? pause_menu_exit() : pause_menu_setup();
-	if (isPaused) { pause_menu_update(); };
+	if (isPaused) { pause_menu_update(); return; };
 
 	p_update();
 	// simple_move();

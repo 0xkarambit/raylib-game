@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -34,6 +35,10 @@ void ui_poll_click(Element_t *self)
 
 	if (ui_core_clickInRect(mouse_x, mouse_y, self->x, self->y, self->w, self->h))
 	{
+		if (self->onClick == NULL) {
+			printf("No onClick function specified for \"%s\" button", self->text);
+			return;
+		}
 		self->onClick(self);
 	}
 }

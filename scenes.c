@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "scenes.h"
 
 
@@ -11,17 +13,30 @@ SCENE* ALL_SCENES[] = {
 };
 
 extern SCENE* current_scene;
+extern SCENE* next_scene;
 
-bool switch_scene(SCENE* next_scene)
+bool switch_scene(SCENE* nxt_scene)
 {
-	if (current_scene->exit())
-	{
-		current_scene = next_scene;
-		current_scene->setup();
-	} else {
-		// unable to exit scene ! user must have something going on ...??
-		return false;
-	}
-
+	printf("QUEUEING SCENE !\n");
+	next_scene = nxt_scene;
 	return true;
 }
+
+bool swap_scenes()
+{
+	if (next_scene != NULL)
+	{
+		if (current_scene->exit())
+		{
+			current_scene = next_scene;
+			current_scene->setup();
+			next_scene = NULL;
+		} else {
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+// okay so we need to change the switch_scene function !

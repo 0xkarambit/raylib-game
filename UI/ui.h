@@ -33,6 +33,15 @@ struct element_s
 };
 
 
+typedef struct Element_data_s {
+	int x, y, w, h, fs;			// font-size
+	Color bg_color;
+	Color color;
+
+	char *text;
+	void (*onClick)(Element_t *self);
+} Element_data_t;
+
 // to create a new btn !
 Element_t ui_create_button(char* text);
 
